@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">CoordinatorLayoutDemo</string>
+
+    <string name="content">一个神秘的网站</string>
+
+    <string name="behavior_main_content">com.cold.coordinatorlayoutdemo.mix.behavior.MainContentBehavior</string>
+    <string name="behavior_main_header">com.cold.coordinatorlayoutdemo.mix.behavior.MainHeaderBehavior</string>
+    <string name="behavior_main_title">com.cold.coordinatorlayoutdemo.mix.behavior.MainTitleBehavior</string>
+    <string name="behavior_main_tab">com.cold.coordinatorlayoutdemo.mix.behavior.MainTabBehavior</string>
+
+    <string name="behavior_xiami_comment">com.othershe.behaviortest.xiami.behavior.XiamiCommentBehavior</string>
+    <string name="behavior_xiami_title">com.othershe.behaviortest.xiami.behavior.XiamiTitleBehavior</string>
+
+    <string name="behavior_sample_title">com.cold.coordinatorlayoutdemo.nested.SampleTitleBehavior</string>
+    <string name="behavior_sample_title1">com.cold.coordinatorlayoutdemo.nested.SampleTitleBehavior1</string>
+
+    <string name="behavior_sample_header">com.othershe.behaviortest.test2.SampleHeaderBehavior</string>
+    <string name="behavior_recyclerview">com.othershe.behaviortest.test2.RecyclerViewBehavior</string>
+
+    <string name="behavior">com.cold.coordinatorlayoutdemo.nested1.AppBarBehavior</string>
+
+    <string name="behavior_sample_title2">com.cold.coordinatorlayoutdemo.nested2.SampleTitleBehavior2</string>
+
+    <string name="textContent">传输控制协议（TCP，Transmission Control Protocol）是为了在不可靠的互联网络上提供可靠的端到端字节流而专门设计的一个传输协议。 [2]
+互联网络与单个网络有很大的不同，因为互联网络的不同部分可能有截然不同的拓扑结构、带宽、延迟、数据包大小和其他参数。TCP的设计目标是能够动态地适应互联网络的这些特性，而且具备面对各种故障时的健壮性。 [2]
+不同主机的应用层之间经常需要可靠的、像管道一样的连接，但是IP层不提供这样的流机制，而是提供不可靠的包交换。 [3]
+应用层向TCP层发送用于网间传输的、用8位字节表示的数据流，然后TCP把数据流分区成适当长度的报文段（通常受该计算机连接的网络的数据链路层的最大传输单元（MTU）的限制）。之后TCP把结果包传给IP层，由它来通过网络将包传送给接收端实体的TCP层。TCP为了保证不发生丢包，就给每个包一个序号，同时序号也保证了传送到接收端实体的包的按序接收。然后接收端实体对已成功收到的包发回一个相应的确认（ACK）；如果发送端实体在合理的往返时延（RTT）内未收到确认，那么对应的数据包就被假设为已丢失将会被进行重传。TCP用一个校验和函数来检验数据是否有错误；在发送和接收时都要计算校验和。 [3]
+每台支持TCP的机器都有一个TCP传输实体。TCP实体可以是一个库过程、一个用户进程，或者内核的一部分。在所有这些情形下，它管理TCP流，以及与IP层之间的接口。TCP传输实体接受本地进程的用户数据流，将它们分割成不超过64KB（实际上去掉IP和TCP头，通常不超过1460数据字节）的分段，每个分段以单独的IP数据报形式发送。当包含TCP数据的数据报到达一台机器时，它们被递交给TCP传输实体，TCP传输实体重构出原始的字节流。为简化起见，我们有时候仅仅用“TCP”来代表TCP传输实体（一段软件）或者TCP协议（一组规则）。根据上下文语义你应该能很消楚地推断出其实际含义。例如，在“用户将数据交给TCP”这句话中，很显然这里指的是TCP传输实体。 [2]
+IP层并不保证数据报一定被正确地递交到接收方，也不指示数据报的发送速度有多快。正是TCP负责既要足够快地发送数据报，以便使用网络容量，但又不能引起网络拥塞：而且，TCP超时后，要重传没有递交的数据报。即使被正确递交的数据报，也可能存在错序的问题，这也是TCP的责任，它必须把接收到的数据报重新装配成正确的顺序。简而言之，TCP必须提供可靠性的良好性能，这正是大多数用户所期望的而IP又没有提供的功能。</string>
+
+</resources>

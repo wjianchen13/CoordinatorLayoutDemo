@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="title_height">45dp</dimen>
+    <dimen name="header_offset">-90dp</dimen>
+    <dimen name="tab_height">45dp</dimen>
+
+    <dimen name="xiami_title_height">60dp</dimen>
+
+    <dimen name="scale_fourHundred_fifty">450dp</dimen>
+    <dimen name="space_ten">10dp</dimen>
+    <dimen name="scale_eighty">80dp</dimen>
+    <dimen name="scale_forty">40dp</dimen>
+    <dimen name="h1">23sp</dimen>
+</resources>
