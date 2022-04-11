@@ -11,7 +11,7 @@
         android:background="@android:color/holo_blue_light"
         app:layout_behavior="@string/behavior_main_header">
 
-        <com.cold.coordinatorlayoutdemo.project.NestedLinearLayout
+        <com.othershe.behaviortest.helper.NestedLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -26,7 +26,7 @@
                 android:text="Hello World"
                 android:textColor="@android:color/white" />
 
-        </com.cold.coordinatorlayoutdemo.project.NestedLinearLayout>
+        </com.othershe.behaviortest.helper.NestedLinearLayout>
     </FrameLayout>
 
     <LinearLayout

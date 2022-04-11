@@ -1,4 +1,4 @@
-package com.cold.coordinatorlayoutdemo;
+package com.cold.coordinatorlayoutdemo.tab;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

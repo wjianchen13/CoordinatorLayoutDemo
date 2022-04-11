@@ -1,4 +1,4 @@
-package com.cold.coordinatorlayoutdemo.mix;
+package com.cold.coordinatorlayoutdemo.tab;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.cold.coordinatorlayoutdemo.R;
-import com.cold.coordinatorlayoutdemo.mix.behavior.MainHeaderBehavior;
+import com.cold.coordinatorlayoutdemo.behavior.MainHeaderBehavior;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class TestActivity3 extends AppCompatActivity implements MainHeaderBehavi
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
 
-        fragments.add(ScrollFragment.newInstance());
+        fragments.add(TypeFragment.newInstance());
         fragments.add(TypeFragment.newInstance());
         fragments.add(TypeFragment.newInstance());
 

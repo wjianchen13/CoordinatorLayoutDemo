@@ -9,12 +9,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cold.coordinatorlayoutdemo.appbarlayout.AppBarLayoutActivity;
+import com.cold.coordinatorlayoutdemo.base.BaseActivity;
+import com.cold.coordinatorlayoutdemo.basebehavior.BaseBehaviorActivity;
+import com.cold.coordinatorlayoutdemo.collapse.CollapseActivity;
 import com.cold.coordinatorlayoutdemo.fanal.FinalActivity;
-import com.cold.coordinatorlayoutdemo.mix.TestActivity3;
+import com.cold.coordinatorlayoutdemo.mix.MixActivity;
 import com.cold.coordinatorlayoutdemo.nested.NestedActivity;
 import com.cold.coordinatorlayoutdemo.nested1.NestedActivity1;
 import com.cold.coordinatorlayoutdemo.nested2.NestedActivity2;
 import com.cold.coordinatorlayoutdemo.nested3.NestedActivity3;
+import com.cold.coordinatorlayoutdemo.project.ProjectActivity;
+import com.cold.coordinatorlayoutdemo.stickyviewpager.StickyActivity;
+import com.cold.coordinatorlayoutdemo.test.TestActivity;
+import com.cold.coordinatorlayoutdemo.userinfo.UserActivity;
+import com.cold.coordinatorlayoutdemo.viewpager.ViewPagerParallaxSnap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMix(View v) {
-        startActivity(new Intent(this, TestActivity3.class));
+        startActivity(new Intent(this, MixActivity.class));
     }
 
     public void onNested(View v) {
@@ -56,6 +64,95 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, FinalActivity.class));
     }
 
+    /**
+     * 基础使用
+     * @param
+     * @return
+     */
+    public void onTest(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, ViewPagerParallaxSnap.class);
+        startActivity(it1);
+    }
+
+    /**
+     * 基础使用
+     * @param
+     * @return
+     */
+    public void onTest1(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, TestActivity.class);
+        startActivity(it1);
+    }
+
+    /**
+     * base behavior
+     * @param
+     * @return
+     */
+    public void onBaseBehavior(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, BaseBehaviorActivity.class);
+        startActivity(it1);
+    }
+
+    /**
+     * 粘性viewpager,使用的是系统提供的CollapsingToolbarLayout
+     * @param
+     * @return
+     */
+    public void onSticky(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, StickyActivity.class);
+        startActivity(it1);
+    }
+
+    /**
+     * 基础测试
+     * @param
+     * @return
+     */
+    public void onBase(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, BaseActivity.class);
+        startActivity(it1);
+    }
+
+    /**
+     * 基础测试
+     * @param
+     * @return
+     */
+    public void onProject(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, ProjectActivity.class);
+        startActivity(it1);
+    }
+
+
+    /**
+     * 个人资料demo
+     * @param
+     * @return
+     */
+    public void onUser(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, UserActivity.class);
+        startActivity(it1);
+    }
+
+    /**
+     * 通过CollapsingToolbarLayout实现
+     * @param
+     * @return
+     */
+    public void onCollapse(View v) {
+        Intent it1 = new Intent();
+        it1.setClass(MainActivity.this, CollapseActivity.class);
+        startActivity(it1);
+    }
+    
     public void onGet(View v) {
         mView = LayoutInflater.from(this).inflate(R.layout.view_main_pager_title_view, null);
         getTextViewHeight(mView);

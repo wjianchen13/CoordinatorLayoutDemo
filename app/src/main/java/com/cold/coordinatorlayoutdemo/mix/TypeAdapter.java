@@ -31,7 +31,7 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.MyViewHolder>{
     @Override
     public TypeAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(context).inflate(R.layout.item_layout, parent,false);
+        inflater = LayoutInflater.from(context).inflate(R.layout.item_type_layout, parent,false);
         TypeAdapter.MyViewHolder myViewHolder = new TypeAdapter.MyViewHolder(inflater);
         return myViewHolder;
     }
@@ -57,7 +57,7 @@ public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.MyViewHolder>{
 //
 //    @Override
 //    protected int getItemLayoutId() {
-//        return R.layout.item_layout;
+//        return R.layout.item_type_layout;
 //    }
 
     //内部类，绑定控件

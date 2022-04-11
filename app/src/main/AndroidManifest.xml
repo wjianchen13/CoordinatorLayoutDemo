@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mix.TestActivity3" />
+        <activity android:name=".mix.MixActivity" />
 
         <activity android:name=".nested.NestedActivity" />
         <activity android:name=".nested1.NestedActivity1" />
@@ -27,6 +27,15 @@
         <activity android:name=".fanal.FinalActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <activity android:name=".viewpager.ViewPagerParallaxSnap"/>
+        <activity android:name=".test.TestActivity"/>
+        <activity android:name=".basebehavior.BaseBehaviorActivity" />
+        <activity android:name=".stickyviewpager.StickyActivity" />
+        <activity android:name=".userinfo.UserActivity" />
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".project.ProjectActivity" />
+        <activity android:name=".collapse.CollapseActivity" />
+        
     </application>
 
 </manifest>

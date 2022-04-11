@@ -1,4 +1,4 @@
-package com.cold.coordinatorlayoutdemo;
+package com.cold.coordinatorlayoutdemo.mix;
 
 import android.os.Bundle;
 
@@ -9,12 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.cold.coordinatorlayoutdemo.behavior.MainHeaderBehavior;
+import com.cold.coordinatorlayoutdemo.R;
+import com.cold.coordinatorlayoutdemo.mix.behavior.MainHeaderBehavior;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class TestActivity3 extends AppCompatActivity implements MainHeaderBehavior.OnHeaderStateListener {
+public class MixActivity extends AppCompatActivity implements MainHeaderBehavior.OnHeaderStateListener {
 
     private ViewPager mViewPager;
 
@@ -23,7 +24,7 @@ public class TestActivity3 extends AppCompatActivity implements MainHeaderBehavi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test3);
+        setContentView(R.layout.activity_mix);
 //
 //        mHeaderBehavior = (HeaderBehavior) ((CoordinatorLayout.LayoutParams) (findViewById(R.id.header)).getLayoutParams()).getBehavior();
 //
@@ -35,7 +36,7 @@ public class TestActivity3 extends AppCompatActivity implements MainHeaderBehavi
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
 
-        fragments.add(TypeFragment.newInstance());
+        fragments.add(ScrollFragment.newInstance());
         fragments.add(TypeFragment.newInstance());
         fragments.add(TypeFragment.newInstance());
 
