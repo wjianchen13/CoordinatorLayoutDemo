@@ -151,6 +151,15 @@
             android:text="折叠方式"
             android:onClick="onCollapse"
             android:textAllCaps="false"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="view依赖"
+            android:onClick="onDepend"
+            android:textAllCaps="false"/>
         
     </LinearLayout>
 

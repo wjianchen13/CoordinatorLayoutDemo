@@ -123,7 +123,7 @@ public class FinalActivity extends AppCompatActivity {
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                //verticalOffset  当前偏移量 appBarLayout.getTotalScrollRange() 最大高度 便宜值
+                //verticalOffset  当前偏移量 appBarLayout.getTotalScrollRange() 最大高度 偏移值
                 int Offset = Math.abs(verticalOffset); //目的是将负数转换为绝对正数；
                 System.out.println("===============> verticalOffset: " + verticalOffset);
                 System.out.println("===============> getTotalScrollRange: " + appBarLayout.getTotalScrollRange());

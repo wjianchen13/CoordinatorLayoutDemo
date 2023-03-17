@@ -35,7 +35,8 @@
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".project.ProjectActivity" />
         <activity android:name=".collapse.CollapseActivity" />
-        
+        <activity android:name=".depend.DependActivity" />
+
     </application>
 
 </manifest>

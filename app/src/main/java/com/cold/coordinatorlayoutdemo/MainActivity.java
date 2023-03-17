@@ -12,6 +12,7 @@ import com.cold.coordinatorlayoutdemo.appbarlayout.AppBarLayoutActivity;
 import com.cold.coordinatorlayoutdemo.base.BaseActivity;
 import com.cold.coordinatorlayoutdemo.basebehavior.BaseBehaviorActivity;
 import com.cold.coordinatorlayoutdemo.collapse.CollapseActivity;
+import com.cold.coordinatorlayoutdemo.depend.DependActivity;
 import com.cold.coordinatorlayoutdemo.fanal.FinalActivity;
 import com.cold.coordinatorlayoutdemo.mix.MixActivity;
 import com.cold.coordinatorlayoutdemo.nested.NestedActivity;
@@ -165,5 +166,14 @@ public class MainActivity extends AppCompatActivity {
         v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
         tvTest.setText("width: " + v.getMeasuredWidth() + "  height: " + v.getMeasuredHeight());
         return v.getMeasuredHeight();
+    }
+
+    /**
+     * View 依赖
+     * @param
+     * @return
+     */
+    public void onDepend(View v) {
+        startActivity(new Intent(this, DependActivity.class));
     }
 }
