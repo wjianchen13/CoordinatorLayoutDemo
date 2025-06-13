@@ -1,12 +1,12 @@
 package com.cold.coordinatorlayoutdemo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cold.coordinatorlayoutdemo.appbarlayout.AppBarLayoutActivity;
 import com.cold.coordinatorlayoutdemo.base.BaseActivity;
@@ -22,6 +22,7 @@ import com.cold.coordinatorlayoutdemo.nested3.NestedActivity3;
 import com.cold.coordinatorlayoutdemo.project.ProjectActivity;
 import com.cold.coordinatorlayoutdemo.stickyviewpager.StickyActivity;
 import com.cold.coordinatorlayoutdemo.test.TestActivity;
+import com.cold.coordinatorlayoutdemo.test2.TestActivity2;
 import com.cold.coordinatorlayoutdemo.userinfo.UserActivity;
 import com.cold.coordinatorlayoutdemo.viewpager.ViewPagerParallaxSnap;
 
@@ -176,4 +177,14 @@ public class MainActivity extends AppCompatActivity {
     public void onDepend(View v) {
         startActivity(new Intent(this, DependActivity.class));
     }
+
+    /**
+     * 基础测试
+     * @param
+     * @return
+     */
+    public void onTest2(View v) {
+        startActivity(new Intent(this, TestActivity2.class));
+    }
+
 }

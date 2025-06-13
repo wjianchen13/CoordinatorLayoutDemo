@@ -56,8 +56,8 @@ public class StickyActivity extends AppCompatActivity{
         mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mViewPager=(ViewPager)findViewById(R.id.view_pager);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_sticky_header);
         mViewPager.setOffscreenPageLimit(2);
 

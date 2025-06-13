@@ -37,6 +37,7 @@
         <activity android:name=".project.ProjectActivity" />
         <activity android:name=".collapse.CollapseActivity" />
         <activity android:name=".depend.DependActivity" />
+        <activity android:name=".test2.TestActivity2" />
 
     </application>
 
