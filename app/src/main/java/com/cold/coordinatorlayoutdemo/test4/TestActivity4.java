@@ -10,11 +10,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cold.coordinatorlayoutdemo.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -23,7 +28,7 @@ import java.util.List;
 public class TestActivity4 extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
-    private List<BaseFragment> bodyFragments;
+    private List<String> tabTitles;
     private ImageView mHeaderIcon;
     private Toolbar toolbaretail;
     private AppBarLayout appBar;
@@ -33,6 +38,10 @@ public class TestActivity4 extends AppCompatActivity {
     private LinearLayout llytTab;
     private View vHolder;
     private RelativeLayout tvTitle;
+    private SmartRefreshLayout activityRefreshLayout;
+    private HomeTabMainFragmentAdapter mAdapter;
+    private TabLayoutMediator tabMediator;
+    private ViewPager2.OnPageChangeCallback pageChangeCallback;
 //    private LineChatBannerView nbv;
 
     @Override
@@ -40,9 +49,29 @@ public class TestActivity4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_test4);
+
+        // Optional activity-level refresh layout if present in layout
+        activityRefreshLayout = findViewById(R.id.activity_refresh_layout);
+        if (activityRefreshLayout != null) {
+            activityRefreshLayout.setEnableLoadMore(false);
+            activityRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+                @Override
+                public void onRefresh(RefreshLayout refreshLayout) {
+                    int currentItem = viewPager.getCurrentItem();
+                    Fragment fragment = getSupportFragmentManager()
+                            .findFragmentByTag("f" + mAdapter.getItemId(currentItem));
+                    if (fragment instanceof BaseFragment) {
+                        ((BaseFragment) fragment).onActivityRefresh(activityRefreshLayout);
+                    } else {
+                        if (activityRefreshLayout != null) activityRefreshLayout.finishRefresh();
+                    }
+                }
+            });
+        }
+
         llytContent = findViewById(R.id.llyt_content);
         tvTitle = findViewById(R.id.rlyt_title);
-        llytContent.setVisibility(View.GONE);
+        if (llytContent != null) llytContent.setVisibility(View.GONE);
         vHolder = findViewById(R.id.v_holder);
         nbv = findViewById(R.id.banner);
         llytTab = findViewById(R.id.llyt_tab);
@@ -50,85 +79,75 @@ public class TestActivity4 extends AppCompatActivity {
         tabLayout = findViewById(R.id.community_container_tab_layout);
         viewPager = findViewById(R.id.viewPager);
         mHeaderIcon = findViewById(R.id.person_user_head_icon);
-        mHeaderIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                final CustomDialog customDialog = new CustomDialog(MainActivity177.this);
-//                customDialog.setAwardGetNum(10);
-//                customDialog.setmClickListener(new CustomDialog.ViewClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        if (customDialog != null) {
-//                            customDialog.dismiss();
-//                        }
-//                    }
-//                });
-//
-//                customDialog.show();
-                Toast.makeText(TestActivity4.this, "click", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (mHeaderIcon != null) {
+            mHeaderIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(TestActivity4.this, "click", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
 
         toolbaretail = findViewById(R.id.toolbaretail);
-//        toolbaretail.setTitle("姓名不能超过10个字呀呀呀");
-//        View v = toolbaretail.getChildAt(0);
-//        if(v != null && v instanceof TextView) {
-//           TextView tv = (TextView)v;
-//            tv.getLayoutParams().width = LinearLayout.LayoutParams.MATCH_PARENT;
-//
-//            tv.setGravity(Gravity.CENTER_HORIZONTAL);
-//        }
-        toolbaretail.setTitle("");
+        if (toolbaretail != null) toolbaretail.setTitle("");
 
-        List<String> bodyFragments = new ArrayList<>();
-        bodyFragments.add("ta回答的");
-        bodyFragments.add("ta得到的");
+        tabTitles = new ArrayList<>();
+        tabTitles.add("ta回答的");
+        tabTitles.add("ta得到的");
 
-        HomeTabMainFragmentAdapter mAdapter = new HomeTabMainFragmentAdapter(getSupportFragmentManager(), getLifecycle(), bodyFragments);
+        // use FragmentActivity constructor for adapter
+        mAdapter = new HomeTabMainFragmentAdapter(this, tabTitles);
         viewPager.setAdapter(mAdapter);
-        viewPager.setOffscreenPageLimit(2);
-//        tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
+        int offscreen = Math.max(1, tabTitles.size() - 1);
+        viewPager.setOffscreenPageLimit(offscreen);
+
+        tabMediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            tab.setText(tabTitles.get(position));
+        });
+        tabMediator.attach();
+
+        // force tab visual settings
+        if (tabLayout != null) {
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
+            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            tabLayout.setSelectedTabIndicatorColor(android.graphics.Color.YELLOW);
+            try {
+                int normalColor = getResources().getColor(R.color.white40);
+                int selectedColor = getResources().getColor(R.color.white);
+                tabLayout.setTabTextColors(normalColor, selectedColor);
+            } catch (Exception ignored) {
+                tabLayout.setTabTextColors(android.graphics.Color.LTGRAY, android.graphics.Color.WHITE);
+            }
+            // ensure text set
+            for (int i = 0; i < tabTitles.size(); i++) {
+                TabLayout.Tab tab = tabLayout.getTabAt(i);
+                if (tab != null) tab.setText(tabTitles.get(i));
+            }
+        }
+
+        // page callback placeholder
+        pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                // custom page change logic
+            }
+        };
+        viewPager.registerOnPageChangeCallback(pageChangeCallback);
 
         shareImg = findViewById(R.id.share_img);
         appBar = findViewById(R.id.app_bar);
-        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                //verticalOffset  当前偏移量 appBarLayout.getTotalScrollRange() 最大高度 偏移值
-                int Offset = Math.abs(verticalOffset); //目的是将负数转换为绝对正数；
-                System.out.println("===============> verticalOffset: " + verticalOffset);
-                System.out.println("===============> getTotalScrollRange: " + appBarLayout.getTotalScrollRange());
-                //标题栏的渐变
-//                toolbaretail.setBackgroundColor(changeAlpha(getResources().getColor(R.color.redcustom)
-//                        , Math.abs(verticalOffset * 1.0f) / appBarLayout.getTotalScrollRange()));
-
-                setTitle(Offset, appBarLayout.getTotalScrollRange());
-                setHolder(Offset, appBarLayout.getTotalScrollRange());
-                /**
-                 * 当前最大高度便宜值除以2 在减去已偏移值 获取浮动 先显示在隐藏
-                 */
-//                if (Offset < appBarLayout.getTotalScrollRange() / 2) {
-//                    toolbaretail.setTitle("");
-//                    toolbaretail.setAlpha((appBarLayout.getTotalScrollRange() / 2 - Offset * 1.0f) / (appBarLayout.getTotalScrollRange() / 2));
-//                    shareImg.setAlpha((appBarLayout.getTotalScrollRange() / 2 - Offset * 1.0f) / (appBarLayout.getTotalScrollRange() / 2));
-//                    shareImg.setImageDrawable(getResources().getDrawable(R.drawable.share_shop));
-////                    toolbaretail.setNavigationIcon(R.drawable.shop_details_2);
-//                    /**
-//                     * 从最低浮动开始渐显 当前 Offset就是  appBarLayout.getTotalScrollRange() / 2
-//                     * 所以 Offset - appBarLayout.getTotalScrollRange() / 2
-//                     */
-//                } else if (Offset > appBarLayout.getTotalScrollRange() / 2) {
-//                    float floate = (Offset - appBarLayout.getTotalScrollRange() / 2) * 1.0f / (appBarLayout.getTotalScrollRange() / 2);
-//                    toolbaretail.setAlpha(floate);
-//                    shareImg.setAlpha(floate);
-////                    toolbaretail.setNavigationIcon(R.drawable.image_left);
-//                    shareImg.setImageDrawable(getResources().getDrawable(R.drawable.img_share));
-//                    toolbaretail.setTitle("禄福来精品翡翠");
-//                    toolbaretail.setAlpha(floate);
-//                }
-            }
-        });
+        if (appBar != null) {
+            appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                @Override
+                public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                    int Offset = Math.abs(verticalOffset);
+                    setTitle(Offset, appBarLayout.getTotalScrollRange());
+                    setHolder(Offset, appBarLayout.getTotalScrollRange());
+                }
+            });
+        }
         initBanner();
 //        nbv.testBanner();
     }
@@ -183,9 +202,30 @@ public class TestActivity4 extends AppCompatActivity {
 //        integers.add(R.drawable.img6);
 //        integers.add(R.drawable.img7);
 
-        nbv.startAutoPlay();
-        nbv.setDelayTime(2000);
-        nbv.setImages(integers).setImageLoader(new GlideImageLoader()).start();
+        if (nbv != null) {
+            nbv.startAutoPlay();
+            nbv.setDelayTime(2000);
+            nbv.setImages(integers).setImageLoader(new GlideImageLoader()).start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (tabMediator != null) {
+            tabMediator.detach();
+            tabMediator = null;
+        }
+        if (viewPager != null && pageChangeCallback != null) {
+            viewPager.unregisterOnPageChangeCallback(pageChangeCallback);
+            pageChangeCallback = null;
+        }
+        if (nbv != null) {
+            try {
+                nbv.stopAutoPlay();
+            } catch (Exception ignored) {
+            }
+        }
     }
 
     /**
@@ -196,4 +236,3 @@ public class TestActivity4 extends AppCompatActivity {
         return Color.argb(alpha, 0, 128, 0);
     }
 }
-

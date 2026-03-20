@@ -41,9 +41,7 @@ public abstract class CommonFragmentStateAdapter extends FragmentStateAdapter {
     protected abstract Fragment createMyFragment(int position);
 
     @Override
-    public int getItemCount() {
-        return 0;
-    }
+    public abstract int getItemCount();
 
     /**
      * 这两个方法必须重写，作为数据改变刷新检测的工具
