@@ -64,16 +64,12 @@ public class NestedActivity1 extends AppCompatActivity implements View.OnClickLi
 
 
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.jumpUrl:
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("https://shop504682254.taobao.com/shop/view_shop.htm?tracelog=twddp&amp;user_number_id=2541121532");
-                intent.setData(content_url);
-                startActivity(intent);
-                break;
-            default:
-                break;
+        if(view.getId() == R.id.jumpUrl) {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse("https://shop504682254.taobao.com/shop/view_shop.htm?tracelog=twddp&amp;user_number_id=2541121532");
+            intent.setData(content_url);
+            startActivity(intent);
         }
 
     }
