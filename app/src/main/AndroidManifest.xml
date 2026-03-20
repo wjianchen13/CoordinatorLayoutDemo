@@ -39,6 +39,8 @@
         <activity android:name=".depend.DependActivity" />
         <activity android:name=".test2.TestActivity2" />
         <activity android:name=".test3.TestActivity3" />
+        <activity android:name=".test4.TestActivity4" />
+
 
     </application>
 

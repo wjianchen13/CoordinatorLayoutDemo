@@ -16,7 +16,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
 import java.util.ArrayList;
 
-public class MyFragment extends BaseFragment {
+public class MyFragment3 extends BaseFragment {
 
     private View mRootView;
     private RecyclerView recyclerView;
@@ -26,7 +26,7 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment, container, false);
+        mRootView = inflater.inflate(R.layout.fragment3, container, false);
         recyclerView = mRootView.findViewById(R.id.recyclerView);
         smartRefreshLayout = mRootView.findViewById(R.id.smart_refresh_layout);
 

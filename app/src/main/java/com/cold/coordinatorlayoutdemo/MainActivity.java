@@ -24,6 +24,7 @@ import com.cold.coordinatorlayoutdemo.stickyviewpager.StickyActivity;
 import com.cold.coordinatorlayoutdemo.test.TestActivity;
 import com.cold.coordinatorlayoutdemo.test2.TestActivity2;
 import com.cold.coordinatorlayoutdemo.test3.TestActivity3;
+import com.cold.coordinatorlayoutdemo.test4.TestActivity4;
 import com.cold.coordinatorlayoutdemo.userinfo.UserActivity;
 import com.cold.coordinatorlayoutdemo.viewpager.ViewPagerParallaxSnap;
 
@@ -196,5 +197,15 @@ public class MainActivity extends AppCompatActivity {
     public void onTest3(View v) {
         startActivity(new Intent(this, TestActivity3.class));
     }
+
+    /**
+     * 上下拉刷新的例子
+     * @param
+     * @return
+     */
+    public void onTest4(View v) {
+        startActivity(new Intent(this, TestActivity4.class));
+    }
+
 
 }
