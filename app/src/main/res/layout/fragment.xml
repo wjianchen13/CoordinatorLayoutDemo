@@ -8,10 +8,7 @@
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.scwang.smartrefresh.layout.header.ClassicsHeader>
+        <!-- 不放 ClassicsHeader，配合 setEnableRefresh(false) 禁用下拉刷新，由 Activity 统一负责下拉刷新 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"

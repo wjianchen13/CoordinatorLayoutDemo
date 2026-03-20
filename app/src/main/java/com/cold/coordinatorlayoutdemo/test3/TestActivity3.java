@@ -10,12 +10,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cold.coordinatorlayoutdemo.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -34,6 +38,8 @@ public class TestActivity3 extends AppCompatActivity {
     private LinearLayout llytTab;
     private View vHolder;
     private RelativeLayout tvTitle;
+    private SmartRefreshLayout activityRefreshLayout;
+    private HomeTabMainFragmentAdapter mAdapter;
 //    private LineChatBannerView nbv;
 
     @Override
@@ -41,6 +47,27 @@ public class TestActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_test3);
+
+        // Activity 级别的下拉刷新，只负责刷新动画，不负责上拉加载
+        activityRefreshLayout = findViewById(R.id.activity_refresh_layout);
+        activityRefreshLayout.setEnableLoadMore(false);
+        activityRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                // 找到当前显示的 Fragment，委托它执行数据刷新
+                // ViewPager2 中 Fragment 的 tag 格式为 "f" + itemId
+                int currentItem = viewPager.getCurrentItem();
+                Fragment fragment = getSupportFragmentManager()
+                        .findFragmentByTag("f" + mAdapter.getItemId(currentItem));
+                if (fragment instanceof BaseFragment) {
+                    ((BaseFragment) fragment).onActivityRefresh(activityRefreshLayout);
+                } else {
+                    // 找不到 Fragment 时直接结束刷新
+                    activityRefreshLayout.finishRefresh();
+                }
+            }
+        });
+
         llytContent = findViewById(R.id.llyt_content);
         tvTitle = findViewById(R.id.rlyt_title);
         llytContent.setVisibility(View.GONE);
@@ -86,7 +113,7 @@ public class TestActivity3 extends AppCompatActivity {
         tabTitles.add("ta回答的");
         tabTitles.add("ta得到的");
 
-        HomeTabMainFragmentAdapter mAdapter = new HomeTabMainFragmentAdapter(getSupportFragmentManager(), getLifecycle(), tabTitles);
+        mAdapter = new HomeTabMainFragmentAdapter(getSupportFragmentManager(), getLifecycle(), tabTitles);
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(2);
 
