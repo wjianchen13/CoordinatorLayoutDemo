@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.cold.coordinatorlayoutdemo.R;
 import com.google.android.material.appbar.AppBarLayout;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class TestActivity3 extends AppCompatActivity {
     private TabLayout tabLayout;
-    private CustomViewPager viewPager;
+    private ViewPager2 viewPager;
     private List<BaseFragment> bodyFragments;
     private ImageView mHeaderIcon;
     private Toolbar toolbaretail;
@@ -82,34 +83,14 @@ public class TestActivity3 extends AppCompatActivity {
 //        }
         toolbaretail.setTitle("");
 
-        bodyFragments = new ArrayList<>();
-        MyFragment myFragment1 = new MyFragment();
-        myFragment1.setmTitle("ta回答的");
-        ScrollFragment3 myFragment2 = new ScrollFragment3();
-        myFragment2.setmTitle("ta得到的");
-        bodyFragments.add(myFragment1);
-        bodyFragments.add(myFragment2);
+        List<String> bodyFragments = new ArrayList<>();
+        bodyFragments.add("ta回答的");
+        bodyFragments.add("ta得到的");
 
-        FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
-                return bodyFragments.get(position);
-            }
-
-            @Override
-            public int getCount() {
-                return bodyFragments.size();
-            }
-
-//            ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
-            @Override
-            public CharSequence getPageTitle(int position) {
-                return bodyFragments.get(position).getmTitle();
-            }
-        };
+        HomeTabMainFragmentAdapter mAdapter = new HomeTabMainFragmentAdapter(getSupportFragmentManager(), getLifecycle(), bodyFragments);
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(2);
-        tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
+//        tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
 
         shareImg = findViewById(R.id.share_img);
         appBar = findViewById(R.id.app_bar);

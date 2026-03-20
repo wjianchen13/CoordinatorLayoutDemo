@@ -241,12 +241,12 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.cold.coordinatorlayoutdemo.test3.CustomViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </com.cold.coordinatorlayoutdemo.test3.CustomViewPager>
+    </androidx.viewpager2.widget.ViewPager2>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
