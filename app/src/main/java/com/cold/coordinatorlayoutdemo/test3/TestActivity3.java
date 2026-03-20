@@ -10,13 +10,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.cold.coordinatorlayoutdemo.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.List;
 public class TestActivity3 extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
-    private List<BaseFragment> bodyFragments;
+    private List<String> tabTitles;
     private ImageView mHeaderIcon;
     private Toolbar toolbaretail;
     private AppBarLayout appBar;
@@ -83,14 +82,17 @@ public class TestActivity3 extends AppCompatActivity {
 //        }
         toolbaretail.setTitle("");
 
-        List<String> bodyFragments = new ArrayList<>();
-        bodyFragments.add("ta回答的");
-        bodyFragments.add("ta得到的");
+        tabTitles = new ArrayList<>();
+        tabTitles.add("ta回答的");
+        tabTitles.add("ta得到的");
 
-        HomeTabMainFragmentAdapter mAdapter = new HomeTabMainFragmentAdapter(getSupportFragmentManager(), getLifecycle(), bodyFragments);
+        HomeTabMainFragmentAdapter mAdapter = new HomeTabMainFragmentAdapter(getSupportFragmentManager(), getLifecycle(), tabTitles);
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(2);
-//        tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来。
+
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            tab.setText(tabTitles.get(position));
+        }).attach();
 
         shareImg = findViewById(R.id.share_img);
         appBar = findViewById(R.id.app_bar);
