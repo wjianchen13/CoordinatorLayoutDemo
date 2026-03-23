@@ -13,12 +13,12 @@ import com.cold.coordinatorlayoutdemo.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 
 public class MyFragment4 extends BaseFragment {
 
+    private View mRootView;
     private RecyclerView recyclerView;
     private SmartRefreshLayout smartRefreshLayout;
     private RecyclerAdapter recyclerAdapter;
@@ -29,14 +29,16 @@ public class MyFragment4 extends BaseFragment {
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view =inflater.inflate(R.layout.fragment4,container,false);
-        recyclerView= (RecyclerView) view.findViewById(R.id.recyclerView);
-        smartRefreshLayout = view.findViewById(R.id.smart_refresh_layout);
+        mRootView = inflater.inflate(R.layout.fragment4,container,false);
+        recyclerView= (RecyclerView) mRootView.findViewById(R.id.recyclerView);
+        smartRefreshLayout = mRootView.findViewById(R.id.smart_refresh_layout);
+        // 禁用 Fragment 层的下拉刷新，由 Activity 统一负责；只开启上拉加载更多
+        smartRefreshLayout.setEnableRefresh(false);
         smartRefreshLayout.setEnableLoadMore(true);
         smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                view.postDelayed(new Runnable() {
+            public void onLoadMore(@NonNull final RefreshLayout refreshLayout) {
+                mRootView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mData.add("222222222222222222");
@@ -44,30 +46,8 @@ public class MyFragment4 extends BaseFragment {
                         mData.add("222222222222222222");
                         mData.add("222222222222222222");
                         mData.add("222222222222222222");
-                        recyclerAdapter.notifyItemRangeInserted(mData.size() - 6,5);
+                        recyclerAdapter.notifyItemRangeInserted(mData.size() - 5,5);
                         smartRefreshLayout.finishLoadMore();
-                    }
-                }, 2000);
-            }
-        });
-
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                view.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mData.clear();
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        mData.add("3333333333333333333333333");
-                        recyclerAdapter.notifyDataSetChanged();
-                        smartRefreshLayout.finishRefresh();
                     }
                 }, 2000);
             }
@@ -76,22 +56,40 @@ public class MyFragment4 extends BaseFragment {
         smartRefreshLayout.setDisableContentWhenRefresh(true);
         smartRefreshLayout.setDisableContentWhenLoading(true);
         mData = new ArrayList<>();
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
-        mData.add("111111111111111111111");
+        for (int i = 0; i < 12; i++) {
+            mData.add("111111111111111111111");
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerAdapter=new RecyclerAdapter(getActivity(),mData);
         recyclerView.setAdapter(recyclerAdapter);
-        return view;
+        return mRootView;
     }
 
+    /**
+     * Activity 触发下拉刷新时调用此方法，Fragment 在这里执行自己的数据刷新逻辑。
+     * 完成后必须调用 activityRefreshLayout.finishRefresh() 来结束 Activity 层的刷新动画。
+     */
+    @Override
+    public void onActivityRefresh(final SmartRefreshLayout activityRefreshLayout) {
+        if (mRootView == null) {
+            if (activityRefreshLayout != null) activityRefreshLayout.finishRefresh();
+            return;
+        }
+        mRootView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mData.clear();
+                for (int i = 0; i < 8; i++) {
+                    mData.add("3333333333333333333333333");
+                }
+                recyclerAdapter.notifyDataSetChanged();
+                // 刷新后重置上拉加载更多的状态
+                if (smartRefreshLayout != null) smartRefreshLayout.resetNoMoreData();
+                // 通知 Activity 层刷新动画结束
+                if (activityRefreshLayout != null) {
+                    activityRefreshLayout.finishRefresh();
+                }
+            }
+        }, 1200);
+    }
 }
