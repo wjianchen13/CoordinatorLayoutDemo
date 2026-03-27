@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 import com.cold.coordinatorlayoutdemo.R;
 
 
-public class ScrollFragment4 extends BaseFragment {
+public class TestSecondFragment4 extends BaseFragment {
 
     private Context mContext;
 
-    public ScrollFragment4() {
+    public TestSecondFragment4() {
 
     }
 
-    public static ScrollFragment4 newInstance() {
-        ScrollFragment4 fragment = new ScrollFragment4();
+    public static TestSecondFragment4 newInstance() {
+        TestSecondFragment4 fragment = new TestSecondFragment4();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -39,7 +39,7 @@ public class ScrollFragment4 extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_scroll, container, false);
+        View view = inflater.inflate(R.layout.fragment_test_second4, container, false);
 //        RecyclerView recyclerView = view.findViewById(R.id.list);
 //        List<String> list = new ArrayList<>();
 //        for (int i = 0; i < 3; i++) {

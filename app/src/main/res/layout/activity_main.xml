@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="上下拉刷新的例子"
+            android:text="上下拉刷新的例子,不修改"
             android:onClick="onTest3"
             android:textAllCaps="false"/>
 
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="上下拉刷新的例子4"
+            android:text="上下拉刷新的例子,项目徽章"
             android:onClick="onTest4"
             android:textAllCaps="false"/>
 

@@ -16,7 +16,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
 import java.util.ArrayList;
 
-public class MyFragment4 extends BaseFragment {
+public class TestFirstFragment4 extends BaseFragment {
 
     private View mRootView;
     private RecyclerView recyclerView;
@@ -29,7 +29,7 @@ public class MyFragment4 extends BaseFragment {
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment4,container,false);
+        mRootView = inflater.inflate(R.layout.fragment_test_first4,container,false);
         recyclerView= (RecyclerView) mRootView.findViewById(R.id.recyclerView);
         smartRefreshLayout = mRootView.findViewById(R.id.smart_refresh_layout);
         // 禁用 Fragment 层的下拉刷新，由 Activity 统一负责；只开启上拉加载更多

@@ -30,7 +30,7 @@ public class HomeTabMainFragmentAdapter extends CommonFragmentStateAdapter {
             String info = infoTabList.get(position);
             if (info != null) {
                 if (position == 1) {
-                    fragment = new ScrollFragment4();
+                    fragment = new TestSecondFragment4();
                 } else {
                     fragment = new MyFragment();
                 }

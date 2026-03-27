@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 上下拉刷新的例子
+     * 上下拉刷新的例子,不修改
      * @param
      * @return
      */
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 上下拉刷新的例子
+     * 上下拉刷新的例子,项目徽章
      * @param
      * @return
      */

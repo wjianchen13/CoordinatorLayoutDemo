@@ -25,7 +25,12 @@ import com.youth.banner.Banner;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 上下拉刷新的例子,项目徽章
+ * 改成自己项目需要的方式
+ */
 public class TestActivity4 extends AppCompatActivity {
+
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private List<String> tabTitles;

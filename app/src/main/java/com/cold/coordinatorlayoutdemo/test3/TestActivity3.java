@@ -25,6 +25,9 @@ import com.youth.banner.Banner;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 上下拉刷新的例子,不修改
+ */
 public class TestActivity3 extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
