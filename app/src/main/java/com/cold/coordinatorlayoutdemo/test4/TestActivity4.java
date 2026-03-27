@@ -47,7 +47,6 @@ public class TestActivity4 extends AppCompatActivity {
     private HomeTabMainFragmentAdapter mAdapter;
     private TabLayoutMediator tabMediator;
     private ViewPager2.OnPageChangeCallback pageChangeCallback;
-//    private LineChatBannerView nbv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class TestActivity4 extends AppCompatActivity {
 
         llytContent = findViewById(R.id.llyt_content);
         tvTitle = findViewById(R.id.rlyt_title);
-        if (llytContent != null) llytContent.setVisibility(View.GONE);
+//        if (llytContent != null) llytContent.setVisibility(View.GONE);
         vHolder = findViewById(R.id.v_holder);
         nbv = findViewById(R.id.banner);
         llytTab = findViewById(R.id.llyt_tab);
